@@ -8,6 +8,11 @@
   <!-- Leaflet stylesheet for interactive map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 小样式：在地图下展示资料来源 */
+    .sources { margin-top: 1rem; font-size: 0.95rem; line-height: 1.5; }
+    .sources a { text-decoration: underline; }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -30,10 +35,9 @@
     <div class="holiday-hero">
       <div class="holiday-hero-text">
         <h1>Passover</h1>
-        <p>Passover (Pesach) commemorates the Israelites’ liberation from slavery in Egypt. The eight‑day spring festival begins on the 15th of Nisan and centers around family and community gatherings.</p>
+        <p>Passover (Pesach) commemorates the Israelites’ liberation from slavery in Egypt. The eight-day spring festival begins on the 15th of Nisan and centers around family and community gatherings.</p>
       </div>
       <div class="holiday-hero-image">
-        <!-- Use a remote image hosted on Wikimedia Commons depicting a Passover seder plate -->
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/SederPlate.jpg" alt="Illustration for Passover">
       </div>
     </div>
@@ -56,11 +60,22 @@
         <p>Passover celebrates freedom and deliverance from oppression. It encourages participants to empathize with those still enslaved and to renew commitments to justice, hospitality and gratitude for liberation.</p>
       </div>
     </div>
+
     <!-- Interactive Exodus map -->
     <section>
       <h2 class="section-title">Interactive Exodus Map</h2>
       <p class="section-subtitle">Explore key locations from the Exodus story. Click on the markers to learn more.</p>
       <div id="exodus-map" class="interactive-map"></div>
+
+      <!-- 页面内 citation 区块 -->
+      <div class="sources">
+        <strong>Sources (coordinates & background):</strong>
+        <ul>
+          <li>Pi-Rameses (Qantir): Pleiades gazetteer entry <a href="https://pleiades.stoa.org/places/905314398" target="_blank" rel="noopener">Pi-Ramesses</a>.</li>
+          <li>Straits of Tiran: Wikipedia overview <a href="https://en.wikipedia.org/wiki/Straits_of_Tiran" target="_blank" rel="noopener">Straits of Tiran</a>; GPS reference <a href="https://latitude.to/articles-by-country/eg/egypt/6144/straits-of-tiran" target="_blank" rel="noopener">latitude.to</a>.</li>
+          <li>Mount Sinai (Jabal Musa): Mindat locality page <a href="https://www.mindat.org/loc-105843.html" target="_blank" rel="noopener">Mount Sinai (Jabal Musa)</a>.</li>
+        </ul>
+      </div>
     </section>
   </main>
 
@@ -71,8 +86,7 @@
     </div>
   </footer>
 
-  <!-- Mobile navigation script -->
-  <!-- Load Leaflet JS for the map -->
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -82,30 +96,59 @@
       if (navToggle && header) {
         navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
       }
+
       // Initialize the Exodus map
       const mapContainer = document.getElementById('exodus-map');
       if (mapContainer && typeof L !== 'undefined') {
         const map = L.map('exodus-map').setView([29.5, 33.0], 6);
-        // Use the OpenStreetMap tile layer for reliability
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: 'Map data © OpenStreetMap contributors',
           maxZoom: 19
         }).addTo(map);
-        // Coordinates for key Exodus locations
-        const piRameses = [31.816667, 32.283333]; // Pi‑Rameses in the Nile Delta
-        const seaCrossing = [29.2, 33.8];         // Approximate Red Sea crossing (Gulf of Suez)
-        const mountSinai = [28.5394, 33.9729];    // Jebel Musa (Mount Sinai)
 
-        // Draw the route polyline with a warm accent colour
-        const route = [piRameses, seaCrossing, mountSinai];
+        // --- Key Exodus locations (with source notes) ---
+
+        // Pi-Rameses (Qantir).
+        // Pleiades place resource: https://pleiades.stoa.org/places/905314398
+        // Example representative coordinates (approx.): 30.80076195 N, 31.8347738 E
+        const piRameses = [30.80076195, 31.8347738];
+
+        // Straits of Tiran (new crossing point used in this map).
+        // General background: https://en.wikipedia.org/wiki/Straits_of_Tiran
+        // Coordinate reference used here (approx. central point of the straits):
+        // latitude.to: 28°00'08.4"N, 34°27'32.99"E  ->  28.002333, 34.459164
+        const straitsOfTiran = [28.002333, 34.459164];
+
+        // Mount Sinai (Jabal Musa).
+        // Mindat locality page: https://www.mindat.org/loc-105843.html
+        // Representative coordinates (approx.): 28.53955 N, 33.97488 E
+        const mountSinai = [28.53955, 33.97488];
+
+        // Draw the route polyline
+        const route = [piRameses, straitsOfTiran, mountSinai];
         L.polyline(route, { color: '#F0B90B', weight: 4 }).addTo(map);
 
-        // Add default markers with informative popups
-        L.marker(piRameses).addTo(map).bindPopup('<strong>Pi‑Rameses</strong><br>Starting point of the Exodus');
-        L.marker(seaCrossing).addTo(map).bindPopup('<strong>Red Sea Crossing (Approx.)</strong><br>Site of the miraculous sea parting');
-        L.marker(mountSinai).addTo(map).bindPopup('<strong>Mount Sinai</strong><br>Location where Moses received the Torah');
+        // Markers with informative popups (include inline citations/links)
+        L.marker(piRameses).addTo(map).bindPopup(
+          '<strong>Pi-Rameses (Qantir)</strong><br>' +
+          'Ancient capital built by Ramesses II; a common starting point of the Exodus narrative. ' +
+          '<a href="https://pleiades.stoa.org/places/905314398" target="_blank" rel="noopener">Source: Pleiades</a>.'
+        );
 
-        // Adjust the map view to show all markers and the route
+        L.marker(straitsOfTiran).addTo(map).bindPopup(
+          '<strong>Straits of Tiran (Approx.)</strong><br>' +
+          'One traditional placement for the sea crossing at the mouth of the Gulf of Aqaba. ' +
+          '<a href="https://en.wikipedia.org/wiki/Straits_of_Tiran" target="_blank" rel="noopener">Background</a> · ' +
+          '<a href="https://latitude.to/articles-by-country/eg/egypt/6144/straits-of-tiran" target="_blank" rel="noopener">Coords</a>. ' +
+          'Other proposals include a crossing near Nuweiba.'
+        );
+
+        L.marker(mountSinai).addTo(map).bindPopup(
+          '<strong>Mount Sinai (Jabal Musa)</strong><br>' +
+          'Traditional site where Moses received the Torah. ' +
+          '<a href="https://www.mindat.org/loc-105843.html" target="_blank" rel="noopener">Source: Mindat</a>.'
+        );
+
         map.fitBounds(route, { padding: [50, 50] });
       }
     });
