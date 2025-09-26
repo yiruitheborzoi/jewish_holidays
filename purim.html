@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purim – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero section for Purim -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Purim</h1>
+        <p>Purim is a joyous festival that commemorates the salvation of the Jewish people from Haman’s plot in ancient Persia, as told in the Book of Esther. It usually falls in late winter or early spring.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons showing hamantaschen pastries -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Hamantaschen.jpg/1200px-Hamantaschen.jpg" alt="Illustration for Purim">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>Purim recalls how Queen Esther and her cousin Mordecai foiled the wicked Haman’s plan to annihilate the Jews of Persia. The name Purim derives from the lots (<em>pur</em>) that Haman cast to determine the date of destruction.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-mask"></i>
+        <h2>Customs & Traditions</h2>
+        <p>The Megillah (Scroll of Esther) is read aloud, and listeners boo at Haman’s name. Festive meals are held, often with costumes and plays reenacting the story. Gifts of food (<em>mishloach manot</em>) are exchanged, and donations are given to those in need (<em>matanot la’evyonim</em>). Triangular pastries called hamantaschen are enjoyed.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Purim celebrates the reversal of fortune and survival against all odds. Its message underscores unity, courage and the importance of standing up against injustice while encouraging generosity and joy.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>

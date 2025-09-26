@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yom Kippur – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <!-- Hero section for Yom Kippur -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Yom Kippur</h1>
+        <p>The Day of Atonement is considered the most solemn and holiest day of the Jewish year. Falling on the 10th day of Tishri, it brings to a close the Ten Days of Repentance that begin with Rosh Hashanah and offers a final opportunity to seek forgiveness and set intentions for the year ahead.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons depicting prayers on Yom Kippur -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Jews_Praying_in_the_Synagogue_on_Yom_Kippur.jpg/960px-Jews_Praying_in_the_Synagogue_on_Yom_Kippur.jpg" alt="Illustration for Yom Kippur">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>Yom Kippur is a day of fasting, prayer and repentance. It is devoted to self‑examination and supplication: congregants gather in synagogues to confess misdeeds, recite liturgical poems and ask for forgiveness from God and from one another. The holiday’s central purpose is spiritual purification through forgiveness, contrition and resolve to do good in the coming year.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-candle-holder"></i>
+        <h2>Customs & Observance</h2>
+        <p>On this solemn day, observers abstain from food and drink for roughly twenty‑five hours and refrain from work, bathing, wearing leather shoes and other physical comforts. The holiday opens with the haunting chant of <em>Kol Nidre</em> on the eve of Yom Kippur and continues with day‑long services featuring repeated confessional prayers and readings, including the Book of Jonah. Many wear white garments to symbolize purity and humility, and the fast concludes at nightfall with a joyous burst of the shofar.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Yom Kippur offers individuals and communities a chance to acknowledge misdeeds, atone for past wrongs and reset their spiritual course. The day embodies themes of forgiveness and renewal, reminding worshippers that sincere repentance and compassionate deeds can alter the divine decree. By fasting and praying together, Jews hope to be sealed in the Book of Life for a year of peace and blessing.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>

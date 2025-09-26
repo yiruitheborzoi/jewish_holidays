@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simchat Torah – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main class="container">
+    <!-- Hero section for Simchat Torah -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Simchat Torah</h1>
+        <p>Simchat Torah, meaning “Rejoicing with the Torah,” celebrates the completion of the annual cycle of Torah readings and immediately begins the cycle anew. It follows Sukkot and Shemini Atzeret.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons showing a modern Simchat Torah celebration -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Simchat_Torah_Rabin_square_2016_on_road_dancing.jpg/1200px-Simchat_Torah_Rabin_square_2016_on_road_dancing.jpg" alt="Illustration for Simchat Torah">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>Outside Israel, Simchat Torah is celebrated on the second day of Shemini Atzeret. The festival marks both the completion and the immediate restart of the Torah reading cycle, highlighting the continuous engagement with sacred texts.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-scroll"></i>
+        <h2>Customs & Traditions</h2>
+        <p>In synagogues, congregants parade the Torah scrolls around the sanctuary in joyful processions called <em>hakafot</em>, singing and dancing. The concluding verses of Deuteronomy are read, followed by the opening of Genesis, symbolizing the unbroken cycle of study. Children often receive flags or treats to join the celebration.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Simchat Torah expresses love and joy for the Torah. By immediately beginning the reading again, the festival reinforces that learning and spiritual growth are ongoing and never truly complete.</p>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>

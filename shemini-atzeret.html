@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shemini Atzeret – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero section for Shemini Atzeret -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Shemini Atzeret</h1>
+        <p>Shemini Atzeret, meaning “Assembly of the Eighth Day,” follows immediately after Sukkot and marks a pause to linger in the joy of the festival. It is observed on the 22nd of Tishri.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons representing the prayer for rain -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Prayer_for_rain123.jpg/1200px-Prayer_for_rain123.jpg" alt="Illustration for Shemini Atzeret">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>This one‑day festival (two outside Israel) comes directly after the seven days of Sukkot. Unlike Sukkot, it has no special dwelling requirements or rituals with the four species. It offers a sacred pause, as if the divine host invites guests to stay one more day before parting.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-hands-praying"></i>
+        <h2>Customs & Traditions</h2>
+        <p>On Shemini Atzeret, Jews no longer wave the lulav and etrog but may still eat in the sukkah. Synagogue services include reciting Yizkor, the memorial prayer for departed loved ones, and the prayer for rain (<em>Tefilat HaGeshem</em>), invoking blessing for the coming season.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Following the universal themes of Sukkot, this festival highlights the intimate relationship between God and the Jewish people. It reinforces gratitude for life‑giving rain and encourages worshippers to carry forward the spiritual elevation of the High Holidays into daily life.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu BiShvat – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero section for Tu BiShvat -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Tu BiShvat</h1>
+        <p>Tu BiShvat, the New Year of the Trees, is a mid‑winter festival that celebrates nature, growth and renewal on the 15th day of the month of Shevat.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons showing a Tu BiShvat seder page -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Tu-Bishvat-Seder.jpg/960px-Tu-Bishvat-Seder.jpg" alt="Illustration for Tu BiShvat">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>Tu BiShvat is one of four “New Years” in the Jewish calendar. Originally used to determine the age of fruit trees for tithing purposes, it has evolved into a celebration of the natural world and ecological awareness.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-seedling"></i>
+        <h2>Customs & Traditions</h2>
+        <p>In Israel, many people plant trees and participate in environmental projects. A Kabbalistic tradition known as the Tu BiShvat seder involves eating specific fruits and nuts—often in four courses accompanied by white and red wine—to symbolize the cycles of nature. Many enjoy a variety of dried fruits, nuts and fresh produce to honor the land.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Tu BiShvat encourages appreciation for the earth and reminds Jews of their connection to the Land of Israel. By focusing on trees and fruits, the holiday underscores themes of growth, sustainability and stewardship of the environment.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>

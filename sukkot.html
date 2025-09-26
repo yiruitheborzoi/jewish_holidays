@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sukkot – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main class="container">
+    <!-- Hero section for Sukkot -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Sukkot</h1>
+        <p>Sukkot is a week‑long harvest festival that begins on the 15th of Tishri. It honors the bounty of the autumn harvest and commemorates the fragile shelters used by the Israelites during their journey through the wilderness.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons showing a sukkah -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sukkah_at_Congregation_Emanu-El_(05326p).jpg/1200px-Sukkah_at_Congregation_Emanu-El_(05326p).jpg" alt="Illustration for Sukkot">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>One of the three pilgrimage festivals, Sukkot lasts seven days and invites Jews to celebrate the harvest while recalling the temporary dwellings built by their ancestors. It begins five days after Yom Kippur and is often called the Feast of Booths or Tabernacles.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-seedling"></i>
+        <h2>Customs & Traditions</h2>
+        <p>Families build a <em>sukkah</em>, a simple hut with at least three walls and a roof of branches. Meals are enjoyed inside, and some people sleep there to experience the impermanence of life. A key ritual involves waving the four species — palm frond, myrtle, willow and citron — in six directions, acknowledging God’s presence everywhere.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>The festival expresses gratitude for the autumn harvest and reminds Jews of their dependence on divine protection in the wilderness. Dwelling in a sukkah encourages humility, a connection to nature and trust in something greater than oneself.</p>
+      </div>
+    </div>
+    <!-- Interactive Four Species image -->
+    <section>
+      <h2 class="section-title">Interactive Four Species</h2>
+      <p class="section-subtitle">Tap or click on each element to discover its meaning.</p>
+      <div class="interactive-image">
+        <!-- Use a colourful photograph of the Four Species for clarity -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Arbaat_haminim-2.jpg/1280px-Arbaat_haminim-2.jpg" alt="Lulav, etrog, myrtle and willow used during Sukkot">
+        <!-- Hotspot for Lulav -->
+        <div class="hotspot" style="top: 50%; left: 35%;">
+          <div class="tooltip"><strong>Lulav (Palm)</strong><br>The palm frond represents the spine, standing tall and strong.</div>
+        </div>
+        <!-- Hotspot for Myrtle -->
+        <div class="hotspot" style="top: 30%; left: 68%;">
+          <div class="tooltip"><strong>Hadas (Myrtle)</strong><br>Myrtle branches symbolize the eyes and inspire good deeds.</div>
+        </div>
+        <!-- Hotspot for Willow -->
+        <div class="hotspot" style="top: 75%; left: 70%;">
+          <div class="tooltip"><strong>Aravah (Willow)</strong><br>Willow branches represent the lips and the power of prayer.</div>
+        </div>
+        <!-- Hotspot for Etrog -->
+        <div class="hotspot" style="top: 15%; left: 40%;">
+          <div class="tooltip"><strong>Etrog (Citron)</strong><br>The citron fruit symbolizes the heart and the pursuit of joy and compassion.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navigation toggle for mobile responsiveness
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      if (navToggle && header) {
+        navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+      }
+      // Hotspot interaction: toggle tooltip on click and close others when clicking elsewhere
+      const hotspots = document.querySelectorAll('.interactive-image .hotspot');
+      hotspots.forEach((hotspot) => {
+        hotspot.addEventListener('click', (event) => {
+          event.stopPropagation();
+          // Close any other active hotspots
+          hotspots.forEach((hs) => {
+            if (hs !== hotspot) hs.classList.remove('active');
+          });
+          hotspot.classList.toggle('active');
+        });
+      });
+      document.addEventListener('click', () => {
+        hotspots.forEach((hs) => hs.classList.remove('active'));
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rosh Hashanah – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <style>
+    :root{
+      --ink:#1f2a37; --muted:#6b7280; --accent:#a46b00;
+      --frame-bg:#fff; --frame-border:#efe9db; --frame-shadow:rgba(0,0,0,.18);
+      --radius:14px;
+    }
+
+    /* ---------- Frame + hover blur ---------- */
+    .frame{background:#fff;border:8px solid var(--frame-border);border-radius:var(--radius);
+      box-shadow:0 6px 18px var(--frame-shadow);padding:6px;display:block;overflow:hidden}
+    .media{position:relative;border-radius:10px;overflow:hidden;background:#f3f4f6;
+      aspect-ratio:4/5}
+    .media img{width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .45s ease,filter .45s ease,opacity .45s ease}
+    .hover-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,.15));color:#fff;
+      opacity:0;transition:opacity .35s ease;text-align:center;padding:10px;font-size:.95rem}
+    .frame:hover .media img{filter:blur(2px) brightness(.9);transform:scale(1.045);opacity:.96}
+    .frame:hover .hover-overlay{opacity:1}
+    .frame-caption{font-size:.9rem;line-height:1.3;color:#445;text-align:center;margin-top:8px}
+
+    /* skeleton while loading */
+    .skeleton{position:absolute;inset:0;background:
+      linear-gradient(90deg,#f1f1f1 0%,#f7f7f7 50%,#f1f1f1 100%);
+      background-size:200% 100%;animation:shimmer 1.3s infinite}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .media.loading img{opacity:0}
+
+    /* ---------- Layout ---------- */
+    .holiday-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;margin-block:2rem}
+    .holiday-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-block:2rem}
+    .holiday-card{background:#fff;border-radius:14px;padding:1.25rem;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .holiday-card h2{display:flex;align-items:center;gap:.5rem}
+    .holiday-card i{color:var(--accent)}
+    .gallery{margin-block:2.5rem 3rem}
+    .gallery h2{margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+
+    /* >>> CHANGED: fix gallery to 3 columns per row */
+    .gallery-grid{
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .gallery figure{margin:0}
+
+    /* ---------- Fancy Timeline ---------- */
+    #timeline{margin:3rem 0}
+    .timeline{--track:#e9e2d5;--track2:#f6efe3;--dot:var(--accent);--done:#5a8f5d;
+      position:relative}
+    .t-wrap{position:relative;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding-bottom:.75rem}
+    .t-track{position:relative;display:flex;gap:2.25rem;align-items:flex-start;padding:.75rem 0 1.25rem;min-width:720px}
+    .t-track::before{content:"";position:absolute;left:0;right:0;top:24px;height:4px;border-radius:2px;
+      background:linear-gradient(90deg,var(--track),var(--track2));box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+    .t-item{position:relative;width:240px;flex:0 0 auto;scroll-snap-align:start}
+    .t-dot{position:relative;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--dot);
+      box-shadow:0 0 0 4px #fff;transform:translateY(2px)}
+    .t-item.done .t-dot{border-color:var(--done)}
+    .t-card{background:#fff;border-radius:12px;box-shadow:0 10px 22px rgba(0,0,0,.08);padding:.85rem 1rem;margin-top:.5rem}
+    .t-title{font-weight:700;margin:0 0 .25rem}
+    .t-sub{color:var(--muted);margin:0;font-size:.92rem}
+    .t-num{position:absolute;top:-10px;left:-10px;background:#fff;border:2px solid rgba(0,0,0,.06);
+      width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.8rem;color:#7b7b7b}
+
+    /* responsive */
+    @media (max-width: 920px){
+      .holiday-hero{grid-template-columns:1fr}
+      .holiday-cards{grid-template-columns:1fr}
+      /* >>> CHANGED: keep 3 columns on small screens too (each图更小) */
+      .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .t-track{gap:1.25rem}
+      .t-item{width:200px}
+    }
+  </style>
+</head>
+<body>
+<header class="header">
+  <nav class="navbar container">
+    <a href="index.html" class="logo">Jewish Holidays</a>
+    <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    <div class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#categories">Holidays</a>
+      <a href="#timeline">Timeline</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="index.html#about">About</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  <!-- Hero -->
+  <div class="holiday-hero">
+    <div class="holiday-hero-text">
+      <h1>Rosh Hashanah</h1>
+      <p>Rosh Hashanah is the Jewish New Year. It opens the Ten Days of Repentance leading up to Yom Kippur and balances solemn introspection with the joyful celebration of creation and renewal.</p>
+    </div>
+    <figure class="frame">
+      <div class="media loading">
+        <div class="skeleton"></div>
+        <img
+          alt="A Jewish man blowing the shofar for Rosh Hashanah"
+          data-src="photo1.jpg"
+          data-fallbacks="photo1.jpg"
+        />
+        <div class="hover-overlay">Blowing the shofar to awaken the spirit</div>
+      </div>
+    </figure>
+  </div>
+
+  <!-- Info cards -->
+  <div class="holiday-cards">
+    <div class="holiday-card">
+      <h2><i class="fas fa-info-circle"></i>Overview</h2>
+      <p>Rosh Hashanah commemorates the creation of the world and the start of the Jewish calendar. Observed on the first day of Tishri, it begins the Days of Awe, a period dedicated to reflection and repentance.</p>
+    </div>
+    <div class="holiday-card">
+      <h2><i class="fas fa-bread-slice"></i>Customs & Traditions</h2>
+      <p>The holiday is marked by sounding the <em>shofar</em>, a ram’s horn whose blasts awaken the spirit. Families enjoy festive meals featuring round challah to symbolize the cycle of life and slices of apple dipped in honey for a sweet year. Many also perform <em>Tashlich</em>, casting bread into water to cast away misdeeds.</p>
+    </div>
+    <div class="holiday-card">
+      <h2><i class="fas fa-heart"></i>Significance</h2>
+      <p>Beyond ushering in a new year, Rosh Hashanah encourages self-examination, forgiveness and spiritual renewal. It sets the tone for the Days of Awe, culminating with atonement on Yom Kippur.</p>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <section id="timeline" aria-labelledby="tl-title">
+    <h2 id="tl-title" style="display:flex;align-items:center;gap:.5rem;">
+      <i class="fa-solid fa-road"></i> Rosh Hashanah Timeline
+    </h2>
+    <div class="timeline">
+      <div class="t-wrap">
+        <div class="t-track" id="tTrack">
+          <div class="t-item"><span class="t-num">1</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Elul</p><p class="t-sub">Month of preparation; daily shofar blasts in many communities.</p></div></div>
+          <div class="t-item"><span class="t-num">2</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Eve of Rosh Hashanah</p><p class="t-sub">Festive meal, blessings, apples &amp; honey.</p></div></div>
+          <div class="t-item"><span class="t-num">3</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Rosh Hashanah (Day 1)</p><p class="t-sub">Shofar service; themes of kingship, remembrance, shofar.</p></div></div>
+          <div class="t-item"><span class="t-num">4</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Rosh Hashanah (Day 2)</p><p class="t-sub">Continued prayers; many do <em>Tashlich</em> by water.</p></div></div>
+          <div class="t-item"><span class="t-num">5</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Ten Days of Awe</p><p class="t-sub">Focus on reflection, repair, and seeking forgiveness.</p></div></div>
+          <div class="t-item"><span class="t-num">6</span><div class="t-dot"></div><div class="t-card"><p class="t-title">Yom Kippur</p><p class="t-sub">Day of Atonement; fasting and prayer; closing <em>Ne'ilah</em>.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" aria-labelledby="gallery-title">
+    <h2 id="gallery-title"><i class="fas fa-images"></i> Photo Gallery</h2>
+    <div class="gallery-grid">
+
+      <!-- Each figure: data-src + data-fallbacks -->
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Blowing Shofar at the Western Wall"
+               data-src="photo2.jpg"
+               data-fallbacks="photo2.jpg">
+          <div class="hover-overlay">Blowing Shofar at the Western Wall</div>
+        </div>
+        <figcaption class="frame-caption">Blowing Shofar at the Western Wall</figcaption>
+      </figure>
+
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Yemenite shofar blower"
+               data-src="photo3.jpg"
+               data-fallbacks="photo3.jpg">
+          <div class="hover-overlay">Yemenite shofar blower</div>
+        </div>
+        <figcaption class="frame-caption">Yemenite shofar blower</figcaption>
+      </figure>
+
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Daddy, I have my Shofar"
+               data-src="photo4.jpg"
+               data-fallbacks="photo4.jpg">
+          <div class="hover-overlay">Daddy, I have my Shofar</div>
+        </div>
+        <figcaption class="frame-caption">Daddy, I have my Shofar</figcaption>
+      </figure>
+
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Apples & honey"
+               data-src="photo5.jpg"
+               data-fallbacks="photo5.jpg">
+          <div class="hover-overlay">Apples &amp; honey</div>
+        </div>
+        <figcaption class="frame-caption">Apples &amp; honey</figcaption>
+      </figure>
+
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Sweet Crumble Topped Challah"
+               data-src="photo6.jpg"
+               data-fallbacks="photo6.jpg">
+          <div class="hover-overlay">Sweet Crumble Topped Challah</div>
+        </div>
+        <figcaption class="frame-caption">Sweet Crumble Topped Challah</figcaption>
+      </figure>
+
+      <figure class="frame">
+        <div class="media loading">
+          <div class="skeleton"></div>
+          <img alt="Tashlich by the water"
+               data-src="photo7.jpg"
+               data-fallbacks="photo7.jpg">
+          <div class="hover-overlay">Tashlich by the water</div>
+        </div>
+        <figcaption class="frame-caption">Tashlich by the water</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    <p style="font-size:.85rem;color:#666;margin-top:.25rem;">Image sources: Wikimedia Commons (various contributors, CC licenses / public domain).</p>
+  </div>
+</footer>
+
+<script>
+  // --- Mobile nav toggle ---
+  document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('.header');
+    if (navToggle) navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+  });
+
+  // --- Helper: proxy url via images.weserv.nl to avoid hotlink/CORS issues ---
+  const proxify = (url) => {
+    try {
+      const u = new URL(url);
+      // weserv 需要去掉协议
+      return `https://images.weserv.nl/?url=${u.host}${u.pathname}${u.search}`;
+    } catch { return url; }
+  };
+
+  // --- Robust loader with multiple fallbacks + SVG ultimate fallback ---
+  const SVG_PLACEHOLDER = {
+    shofar: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#d1b48e"/><stop offset="1" stop-color="#9b723d"/></linearGradient></defs><rect width="100%" height="100%" fill="#f5f5f5"/><g transform="translate(60,260)"><path d="M10,160 C110,60 280,40 360,80 C440,120 520,140 620,90 C720,40 800,20 820,60 C840,100 760,160 650,210 C540,260 420,260 320,220 C220,180 120,200 30,240 Z" fill="url(#g)" stroke="#815d2e" stroke-width="6" opacity=".95"/><circle cx="790" cy="55" r="22" fill="#fff" opacity=".6"/></g><text x="50" y="80" fill="#444" font-family="Segoe UI, Arial" font-size="34">Rosh Hashanah • Shofar</text></svg>`),
+    honey:  'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700"><rect width="100%" height="100%" fill="#f7f6f2"/><g transform="translate(260,140)"><rect x="80" y="80" width="260" height="260" rx="22" fill="#f2b705"/><rect x="120" y="60" width="180" height="32" rx="8" fill="#d69e00"/><rect x="80" y="160" width="260" height="80" fill="#ffd36b" opacity=".7"/></g><text x="50" y="80" fill="#444" font-family="Segoe UI, Arial" font-size="34">Apples & Honey</text></svg>`),
+    challah:'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700"><rect width="100%" height="100%" fill="#f6f0e7"/><g transform="translate(180,220) scale(1.1)"><ellipse cx="220" cy="90" rx="170" ry="70" fill="#c48a47"/><ellipse cx="320" cy="120" rx="170" ry="70" fill="#b77b3b"/><ellipse cx="260" cy="170" rx="170" ry="70" fill="#c48a47"/></g><text x="50" y="80" fill="#444" font-family="Segoe UI, Arial" font-size="34">Round Challah</text></svg>`)
+  };
+
+  function loadWithFallback(img) {
+    const src = img.getAttribute('data-src');
+    const fallbacks = (img.getAttribute('data-fallbacks') || '').split('|').filter(Boolean);
+    const tries = [src, ...fallbacks];
+
+    let idx = 0;
+    const tryNext = () => {
+      if (idx >= tries.length) {
+        // ultimate fallback: themed SVG by guess
+        const alt = (img.getAttribute('alt') || '').toLowerCase();
+        const ph = alt.includes('challah') ? SVG_PLACEHOLDER.challah :
+                  alt.includes('honey') || alt.includes('apple') ? SVG_PLACEHOLDER.honey :
+                  SVG_PLACEHOLDER.shofar;
+        img.src = ph;
+        finalize(); return;
+      }
+      const candidate = tries[idx++];
+      const probe = new Image();
+      probe.onload = () => { img.src = proxify(candidate); finalize(); };
+      probe.onerror = () => tryNext();
+      // try proxied first (less hotlink issues); if even that 404s, onerror triggers
+      probe.src = proxify(candidate);
+    };
+
+    const finalize = () => {
+      const media = img.closest('.media');
+      if (media){ media.classList.remove('loading'); const sk = media.querySelector('.skeleton'); if (sk) sk.remove(); }
+    };
+
+    tryNext();
+  }
+
+  // lazy init
+  document.querySelectorAll('img[data-src]').forEach(loadWithFallback);
+
+  // --- Timeline progress highlighting (done states as you scroll) ---
+  const track = document.getElementById('tTrack');
+  if (track) {
+    const items = Array.from(track.querySelectorAll('.t-item'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          // mark all previous as done
+          const idx = items.indexOf(entry.target);
+          items.forEach((el,i)=>{ el.classList.toggle('done', i <= idx); });
+        }
+      });
+    }, {root: document.querySelector('.t-wrap'), threshold: .6});
+    items.forEach(el=>io.observe(el));
+  }
+</script>
+</body>
+</html>

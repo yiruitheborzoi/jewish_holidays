@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tisha B'Av – Jewish Holidays Interactive</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hNcZbxUdpo3RZEwSPYLGdF7SP8sqybt85nRyV3nOoHso2M3N+SsjZ3Ect1tLhrE7mWOheOYoTBzsOvij21NQew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="index.html" class="logo">Jewish Holidays</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Holidays</a>
+        <a href="index.html#timeline">Timeline</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero section for Tisha B'Av -->
+    <div class="holiday-hero">
+      <div class="holiday-hero-text">
+        <h1>Tisha B'Av</h1>
+        <p>Tisha B'Av, the Ninth of Av, is a day of fasting and mourning that commemorates the destruction of the First and Second Temples and other tragedies throughout Jewish history.</p>
+      </div>
+      <div class="holiday-hero-image">
+        <!-- Use a remote image hosted on Wikimedia Commons depicting congregants at a synagogue on Tisha B'Av -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Beth_El_congregants_at_the_synagogue_for_Tisha_B%27Av_(4418766481).jpg" alt="Illustration for Tisha B'Av">
+      </div>
+    </div>
+
+    <!-- Informational cards -->
+    <div class="holiday-cards">
+      <div class="holiday-card">
+        <i class="fas fa-info-circle"></i>
+        <h2>Overview</h2>
+        <p>Falling in mid‑summer, Tisha B'Av concludes a three‑week period of mourning that begins with the fast of the 17th of Tammuz. It recalls multiple national calamities, including the destructions of both Temples in Jerusalem.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-book-open"></i>
+        <h2>Customs & Traditions</h2>
+        <p>From sunset to nightfall the next day, observers refrain from eating, drinking, bathing, wearing leather shoes and other comforts. The Book of Lamentations (<em>Eicha</em>) is read by candlelight, and elegies (<em>kinot</em>) are chanted. Mourners sit on low stools or on the floor to express grief. Work is minimized and joyous activities are avoided.</p>
+      </div>
+      <div class="holiday-card">
+        <i class="fas fa-heart"></i>
+        <h2>Significance</h2>
+        <p>Tisha B'Av provides a collective space for grief, reflection and repentance. By confronting historical losses, the day encourages hope for future redemption and a commitment to building a more just and compassionate world.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Jewish Holidays Interactive. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile navigation script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navToggle = document.querySelector('.nav-toggle');
+      const header = document.querySelector('.header');
+      navToggle.addEventListener('click', () => header.classList.toggle('nav-open'));
+    });
+  </script>
+</body>
+</html>
